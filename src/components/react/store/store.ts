@@ -1,12 +1,14 @@
 import { makeAutoObservable } from "mobx";
 
 export default class This {
-  page: number;
+  screen: number;
+  title: string | null;
   constructor() {
     makeAutoObservable(this);
-    this.page = 1;
+    this.screen = 1;
+    this.title = "Przychodnia Dentestyczna";
   }
   setPage(value:number) {
-    this.page = value;
+    this.screen = value;
   }
 }

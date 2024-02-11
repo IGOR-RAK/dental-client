@@ -1,7 +1,8 @@
 import React, { createContext } from "react";
-import Store from "./store/store";
-import {store} from "./store/context"
-import App from "./App";
+import Store from "../store/store";
+import {store} from "../store/context"
+import HeaderContent from "./HeaderContent";
+
 
 interface State {
   store: Store;
@@ -19,7 +20,7 @@ export default function Container() {
         store,
       }}
     >
-      <App />
+      <HeaderContent />
     </Context.Provider>
   );
 }

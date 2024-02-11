@@ -1,10 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/react/Container'
+import HeaderContainer from "../components/react/header/HeaderContainer"
 ---
 
 <Layout title="Welcome to Astro.">
+	<header><HeaderContainer/></header>
 	<Container client:load/>
+	<footer><h2>My Company</h2></footer>
 </Layout>
 
 <style>
