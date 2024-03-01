@@ -19,12 +19,20 @@ interface Minute {
   isReserved: Visit | null;
 }
 
+interface IReservedVisit {
+  id: number;
+  provider: string;
+  start: number;
+  finish: number;
+}
+
 function createMinutesArray(
   totalUnits: number,
   start: number,
   finish: number,
   hiden_time_start: number,
-  hiden_time_end: number
+  hiden_time_end: number,
+  reservedVisits: IReservedVisit[]
 ): Minute[] {
   const minutesArray: Minute[] = [];
 
@@ -47,13 +55,16 @@ function createMinutesArray(
   };
 
   for (let i = 0; i < totalUnits; i++) {
+    const isReservedVisit = reservedVisits.find(
+      (visit) => i * 5 >= visit.start && i * 5 <= visit.finish
+    );
     minutesArray.push({
       number: i,
       isFree: true,
       isOpenTime: setIsOpen(i),
       isHiden: setIsHide(i),
       hour: setHour(i),
-      isReserved: null,
+      isReserved: isReservedVisit || null,
     });
   }
 
@@ -80,12 +91,18 @@ function VisitMaker({
 
   useEffect(() => {
     const totalUnits = 1440 / 5; // Total 5-minute units in a day
+    const reservedVisits: IReservedVisit[] = [
+      { id: 1, provider: "Provider A", start: 601, finish: 615 },
+      { id: 2, provider: "Provider A", start: 801, finish: 815 },
+      { id: 3, provider: "Provider A", start: 861, finish: 875 },
+    ];
     const minutesOfDay: Minute[] = createMinutesArray(
       totalUnits,
       start,
       finish,
       hiden_time_start,
-      hiden_time_end
+      hiden_time_end,
+      reservedVisits
     );
     setDay(minutesOfDay);
   }, []);
@@ -123,7 +140,11 @@ function VisitMaker({
                     key={minute.number}
                     className={`h-[5px] w-full cursor-pointer ${
                       minute.isOpenTime
-                        ? `${!minute.isReserved && "hover:bg-green-700"} ${
+                        ? `${
+                            !minute.isReserved
+                              ? "hover:bg-green-700"
+                              : "bg-red-700"
+                          } ${
                             minute.number % 12 === 0
                               ? "bg-black"
                               : `${
