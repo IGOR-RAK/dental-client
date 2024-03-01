@@ -60,6 +60,7 @@ function createMinutesArray(
       isOpenTime: setIsOpen(i),
       isHiden: setIsHide(i),
       hour: setHour(i),
+      isReserved: null,
     });
   }
 
