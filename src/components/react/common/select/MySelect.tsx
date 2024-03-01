@@ -95,7 +95,7 @@ function MySelect({
         <span
           className={`grow ${
             (state || isFirstItemIsDefault) &&
-            "absolute top-[-1em] left-4 px-5 bg-white text-[0.5em] "
+            "absolute top-[-1em] left-4 px-5 bg-white text-[0.8em] "
           }`}
         >
           {placeholder}

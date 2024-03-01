@@ -3,6 +3,8 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../Container";
 import MySelect from "../common/select/MySelect";
 import type { Item } from "../../../types/index";
+import MyInput from "../common/input/MyInput";
+import VisitMaker from "../../visit_maker/VisitMaker";
 
 const items: Item[] = [
   { id: 1, title: "Reason 1", avatar: null },
@@ -24,9 +26,19 @@ function Calendar() {
   const selectHandler = (item: Item) => {
     console.log(item);
   };
+  const changeHandler = (value: string) => {
+    console.log(value);
+  };
+
+  const firstNameValidChecker = (value: string) => {
+    if (value.length === 0) {
+      return true;
+    }
+    return false;
+  };
   return (
     <div>
-      <h2>Calendar</h2>
+      {/* <h2>Calendar</h2>
       <MySelect
         placeholder='Select a reason'
         items={items}
@@ -38,6 +50,17 @@ function Calendar() {
         items={sex}
         isFirstItemIsDefault={false}
         clickHandler={selectHandler}
+      />
+      <MyInput
+        placeholder='First Name*'
+        changeHandler={changeHandler}
+        checker={firstNameValidChecker}
+      /> */}
+      <VisitMaker
+        start={481}
+        finish={1320}
+        hiden_time_start={1}
+        hiden_time_end={360}
       />
     </div>
   );
